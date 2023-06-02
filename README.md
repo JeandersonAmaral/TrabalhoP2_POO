@@ -27,7 +27,7 @@ Os exemplos dos códigos deverão ser feitos na linguagem de programação pytho
 <hr>
 
 # Polimorfismo:
-O polimorfismo é um princípio na programação orientada a objetos que permite tratar objetos de classes diferentes de forma uniforme, mesmo que tenham comportamentos diferentes. Isso é alcançado através de hierarquias de classes, onde objetos de uma classe base podem ser referenciados por um tipo genérico e, em tempo de execução, o comportamento específico do objeto derivado é invocado. Existem dois tipos principais de polimorfismo: o de sobrecarga, que envolve várias funções com o mesmo nome mas com parâmetros diferentes, e de sobreposição, que ocorre quando uma classe derivada implementa um método de uma classe base. O polimorfismo torna o código mais flexível, reutilizável e modular, permitindo adicionar novas funcionalidades sem modificar o código existente.
+O polimorfismo é um princípio em POO que permite tratar objetos de classes diferentes de forma uniforme, mesmo que tenham comportamentos diferentes. Isso é alcançado através de hierarquias de classes, onde objetos de uma classe base podem ser referenciados por um tipo genérico e, em tempo de execução, o comportamento específico do objeto derivado é invocado. Existem dois tipos principais de polimorfismo: o de sobrecarga, que envolve várias funções com o mesmo nome mas com parâmetros diferentes, e de sobreposição, que ocorre quando uma classe derivada implementa um método de uma classe base. O polimorfismo torna o código mais flexível, reutilizável e modular, permitindo adicionar novas funcionalidades sem modificar o código existente.
 ### Exemplo:
 Nesse exemplo, temos a classe base Animal e três classes derivadas: Cachorro, Gato e Vaca.
 Cada uma dessas classes possui um método fazer_som()que representa o som que o animal faz.
@@ -65,7 +65,7 @@ têm comportamento diferente, mas são tratados de forma uniforme através da cl
 A herança é um conceito em POO que permite que uma classe herde atributos e métodos de outra classe. A classe herdada é chamada de classe derivada, enquanto a classe herdada é chamada de classe base.
 Quando uma classe herda de outra, ela recebe automaticamente todos os atributos e métodos da classe base, podendo usá-los diretamente. Isso facilita a reutilização de código e estabelece uma relação de especialização, onde a classe derivada é uma versão mais específica da classe base.
 ### Exemplo:
-Neste exemplo, a classe Carroherda da classe Veiculo. Isso significa que o carro tem acesso ao método acelerar()da classe Veiculosem precisar defini-lo novamente. Além disso, a classe Carrotambém pode ter seus próprios métodos, como o método abrir_porta().
+Neste exemplo, a classe Carro herda da classe Veiculo. Isso significa que o carro tem acesso ao método acelerar() a classe Veiculo sem precisar defini-lo novamente. Além disso, a classe Carro também pode ter seus próprios métodos, como o método abrir_porta().
 ```python
 class Veiculo:
     def acelerar(self):
@@ -82,3 +82,37 @@ meu_carro.acelerar()     # Saída: O veículo está acelerando.
 meu_carro.abrir_porta()  # Saída: A porta do carro está aberta.
 ```
 Assim, a herança permite que a classe derivada aproveite o código da classe base, evitando duplicação e adicionando funcionalidades específicas, se necessário.
+# Encapsulamento:
+O encapsulamento em Python é alcançado através do uso de convenções de nomenclatura e modificadores de acesso.No entanto, é importante notar que o Python segue uma abordagem "não tão rígida" quanto a outras linguagens orientadas a objetos, como Java ou C++. Ainda assim, é possível aplicar o encapsulamento para proteger os atributos e fornecer uma interface controlada para interagir com eles.
+
+Em Python, por obediência, o prefixo de um atributo ou método com um único sublinhado _ indica que ele deve ser tratado como privado e não deve ser acessado diretamente fora da classe. Já o prefixo com dois sublinhados __indica uma atribuição de "name mangling", alterando o nome do atributo para evitar conflitos em subclasses.
+### Exemplo:
+Nesse exemplo, temos uma classe Carro com um atributo _ cor e um método _ ligar_motor. Esses elementos são considerados protegidos, pois têm um único sublinhado no início de seus nomes. O método acelerar e os métodos obter_cor e alterar_cor são públicos e fornecem uma interface para interagir com os atributos.
+
+```python
+class Carro:
+    def __init__(self):
+        self._cor = 'vermelho'    # Atributo protegido com um sublinhado
+
+    def _ligar_motor(self):       # Método protegido com um sublinhado
+        print("Motor ligado.")
+
+    def acelerar(self):
+        self._ligar_motor()
+        print("Acelerando o carro.")
+
+    def obter_cor(self):
+        return self._cor
+
+    def alterar_cor(self, nova_cor):
+        self._cor = nova_cor
+```
+Podemos criar um objeto da classe Carroe utilizar uma interface pública:
+```python
+meu_carro = Carro()
+meu_carro.acelerar()              # Saída: Motor ligado. Acelerando o carro.
+print(meu_carro.obter_cor())      # Saída: vermelho
+meu_carro.alterar_cor('azul')
+print(meu_carro.obter_cor())      # Saída: azul
+```
+Observe que acessamos o atributo _ cor somente através dos métodos obter_core alterar_cor. Essa é uma forma de aplicar o encapsulamento em Python, mesmo que o acesso aos atributos protegidos não seja restrito.
